@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import CardList from './components/cardList/cardList';
 import Header from './components/header/header';
+import axios from 'axios';
 
 
 import Rectangle from './assets/img/Rectangle 37.svg';
@@ -16,34 +17,20 @@ function App() {
     {name: 'Пуффендуй'},
     {name: 'Когтевран'},
   ])
+
+  useEffect(()=>{
+    axios.get('http://localhost:3001/schools').then((schools)=>{
+      setSchool(schools.data);
+    })
+
+    axios.get('http://localhost:3001/heroes').then((heroes)=>{
+      setCards(heroes.data);
+    })
+
+  }, [])
+
   const [cards , setCards] = useState([
-    {
-      img:Rectangle,
-      name: "Hermione Granger", 
-      actor: "Emma Watson",
-      gender: "female",
-      house:"Gryffindor",
-      wand:"dragon heartstring",
-      alive: true
-    },
-    {
-      img:mal,
-      name: "Draco Malfoy", 
-      actor: "Tom Felton",
-      gender: "male",
-      house:"Slytherin ",
-      wand:"unicorn tail-hair",
-      alive: true
-    },
-    {
-      img:har,
-      name: "Harry Potter", 
-      actor: "Daniel Radcliffe",
-      gender: "male",
-      house:"Gryffindor ",
-      wand:"dragon heartstring",
-      alive: true
-    }
+   
   ]);
 
 
