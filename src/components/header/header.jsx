@@ -1,7 +1,7 @@
 import './header.scss'
 
 
-function Header() {
+function Header({schools}) {
     return <header>
         <div className="container">
         <h1>Harry Potter</h1>
@@ -14,13 +14,14 @@ function Header() {
                     <input type="text" placeholder='Гермиона' id='name'/>
                 </div>
                 <div className="school">
-                    <label htmlFor="">Школа</label>
+                    <label htmlFor="">Факультет</label>
                     <select>
                         <option value="0">Chose one</option>
-                        <option value="1">Гриффиндор</option>
-                        <option value="2">Слизерин</option>
-                        <option value="3">Пуффендуй</option>
-                        <option value="4">Когтевран</option>
+                        {
+                            schools.map((school)=>{
+                                return <option value="0">{school.name}</option>
+                            })
+                        }
                     </select>
                 </div>
                 
