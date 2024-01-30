@@ -36,8 +36,14 @@ function Header({schools, setCards , cards,filterCards, setFilterCards }) {
     }
 
     useEffect(()=>{
-        if(choosedSchool > 0)
-        handleChoosedSchool();
+        if(choosedSchool > 0){
+            handleChoosedSchool();
+        } else{
+            axios.get('http://localhost:3001/heroes').then((heroes)=>{
+        setCards(heroes.data)
+        setFilterCards(heroes.data);
+        })
+        }
       },[choosedSchool])
 
 
