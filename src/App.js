@@ -11,6 +11,8 @@ import har from './assets/img/har.jpeg';
 
 function App() {
 
+
+
   const [schools , setSchool] = useState([
     {name: 'Гриффиндор'},
     {name: 'Слизерин'},
@@ -18,13 +20,16 @@ function App() {
     {name: 'Когтевран'},
   ])
 
+
+
   useEffect(()=>{
     axios.get('http://localhost:3001/schools').then((schools)=>{
       setSchool(schools.data);
     })
 
     axios.get('http://localhost:3001/heroes').then((heroes)=>{
-      setCards(heroes.data);
+      setCards(heroes.data)
+      setFilterCards(heroes.data);
     })
 
   }, [])
@@ -33,6 +38,8 @@ function App() {
    
   ]);
 
+  
+  const [filterCards, setFilterCards] = useState(cards);
 
 
 
@@ -40,9 +47,15 @@ function App() {
 
   return (
     <div className="App">
-      <Header schools={schools}/>
+      <Header 
+      schools={schools}
+      setCards={setCards}
+      cards={cards}
+      filterCards={filterCards}
+      setFilterCards={setFilterCards}
+      />
       <hr/>
-      <CardList cards={cards}/>
+      <CardList cards={filterCards}/>
     </div>
   );
 }
